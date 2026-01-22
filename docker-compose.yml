@@ -1,0 +1,55 @@
+services:
+  app:
+    image: php:8.2-apache
+    container_name: storage-app
+    restart: unless-stopped
+    working_dir: /var/www/html
+    volumes:
+      - ./:/var/www/html
+      - ./docker/php/apache.conf:/etc/apache2/sites-available/000-default.conf
+      - ./docker/php/php.ini:/usr/local/etc/php/conf.d/custom.ini
+    ports:
+      - "8000:80"
+    depends_on:
+      - db
+    networks:
+      - storage-network
+    environment:
+      - DB_HOST=db
+      - DB_DATABASE=storage_db
+      - DB_USERNAME=root
+      - DB_PASSWORD=secret
+      - APP_ENV=local
+      - APP_DEBUG=false
+    command: >
+      bash -c "
+      apt-get update &&
+      apt-get install -y libpng-dev libzip-dev libonig-dev libxml2-dev default-mysql-client libfreetype6-dev libjpeg62-turbo-dev libicu-dev &&
+      docker-php-ext-configure gd --with-freetype --with-jpeg &&
+      docker-php-ext-install pdo pdo_mysql mbstring exif pcntl bcmath gd zip intl opcache &&
+      a2enmod rewrite &&
+      chown -R www-data:www-data /var/www/html &&
+      chmod -R 755 /var/www/html/storage /var/www/html/bootstrap/cache &&
+      php artisan optimize &&
+      apache2-foreground"
+  db:
+    image: mysql:8.0
+    container_name: storage-db
+    restart: unless-stopped
+    environment:
+      MYSQL_DATABASE: storage_db
+      MYSQL_ROOT_PASSWORD: secret
+      MYSQL_PASSWORD: secret
+    ports:
+      - "3307:3306"
+    volumes:
+      - dbdata:/var/lib/mysql
+    networks:
+      - storage-network
+
+volumes:
+  dbdata:
+
+networks:
+  storage-network:
+    driver: bridge
