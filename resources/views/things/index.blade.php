@@ -27,13 +27,15 @@
         @else
             <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
                 @foreach($things as $thing)
-                <div class="group border border-neutral-800 p-6 hover:bg-neutral-900/50 transition-colors duration-500">
+                <div class="flex flex-col group border border-neutral-800 p-6 hover:bg-neutral-900/50 transition-colors duration-500">
                     <!-- Заголовок карточки -->
                     <div class="flex justify-between items-start mb-4">
                         <h3 class="text-xl font-medium text-white">{{ $thing->name }}</h3>
-                        <span class="text-xs font-mono px-2 py-1 border border-neutral-700 rounded text-neutral-400">
-                            ID: {{ $thing->id }}
-                        </span>
+                        <div class="flex flex-col items-end gap-2">
+                            <span class="text-xs font-mono px-2 py-1 border border-neutral-700 rounded text-neutral-400">
+                                ID: {{ $thing->id }}
+                            </span>
+                        </div>
                     </div>
                     
                     <!-- Описание -->
@@ -42,7 +44,7 @@
                     @endif
                     
                     <!-- Детали -->
-                    <ul class="space-y-3 font-mono text-sm text-neutral-400 mb-6">
+                    <ul class="flex flex-col items-start gap-3 font-mono text-sm text-neutral-400 mb-6">
                         @if($thing->wrnt)
                         <li class="flex items-center gap-2">
                             <span class="w-1.5 h-1.5 bg-neutral-700 rounded-full group-hover:bg-lime-400 transition-colors"></span>
@@ -53,10 +55,11 @@
                             <span class="w-1.5 h-1.5 bg-neutral-700 rounded-full group-hover:bg-lime-400 transition-colors"></span>
                             Владелец: {{ $thing->master->name }}
                         </li>
+                        @thingStatus($thing)
                     </ul>
                     
                     <!-- Действия -->
-                    <div class="flex gap-3 pt-4 border-t border-neutral-800">
+                    <div class="flex gap-3 pt-4 border-t border-neutral-800 mt-auto">
                         <a href="{{ route('things.show', $thing) }}" 
                            class="flex-1 text-center py-2 border border-neutral-700 text-sm hover:bg-white hover:text-black transition-colors">
                             Просмотр

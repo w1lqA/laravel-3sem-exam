@@ -20,7 +20,7 @@ services:
       - DB_USERNAME=root
       - DB_PASSWORD=secret
       - APP_ENV=local
-      - APP_DEBUG=false
+      - APP_DEBUG=true
     command: >
       bash -c "
       apt-get update &&
