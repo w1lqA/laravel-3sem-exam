@@ -3,7 +3,6 @@
 @section('content')
 <div class="w-full bg-neutral-950 text-neutral-200 py-12 px-6 md:px-12 font-sans selection:bg-lime-400 selection:text-black">
     <div class="max-w-7xl mx-auto">
-        <!-- Заголовок -->
         <div class="flex flex-col md:flex-row justify-between items-end mb-8 border-b border-neutral-800 pb-6">
             <h2 class="text-4xl md:text-6xl font-bold tracking-tighter text-white">
                 Вещи<span class="text-lime-400">.</span>
@@ -16,7 +15,6 @@
             </div>
         </div>
 
-        <!-- Список вещей -->
         @if($things->isEmpty())
             <div class="border border-neutral-800 p-12 text-center">
                 <p class="text-neutral-500 font-mono uppercase tracking-widest">Нет вещей</p>
@@ -28,7 +26,6 @@
             <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
                 @foreach($things as $thing)
                 <div class="flex flex-col group border border-neutral-800 p-6 hover:bg-neutral-900/50 transition-colors duration-500">
-                    <!-- Заголовок карточки -->
                     <div class="flex justify-between items-start mb-4">
                         <h3 class="text-xl font-medium text-white">{{ $thing->name }}</h3>
                         <div class="flex flex-col items-end gap-2">
@@ -38,12 +35,10 @@
                         </div>
                     </div>
                     
-                    <!-- Описание -->
                     @if($thing->description)
                     <p class="text-neutral-500 text-sm mb-4">{{ Str::limit($thing->description, 100) }}</p>
                     @endif
                     
-                    <!-- Детали -->
                     <ul class="flex flex-col items-start gap-3 font-mono text-sm text-neutral-400 mb-6">
                         @if($thing->wrnt)
                         <li class="flex items-center gap-2">
@@ -58,7 +53,6 @@
                         @thingStatus($thing)
                     </ul>
                     
-                    <!-- Действия -->
                     <div class="flex gap-3 pt-4 border-t border-neutral-800 mt-auto">
                         <a href="{{ route('things.show', $thing) }}" 
                            class="flex-1 text-center py-2 border border-neutral-700 text-sm hover:bg-white hover:text-black transition-colors">

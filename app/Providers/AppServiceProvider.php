@@ -7,17 +7,11 @@ use Illuminate\Support\ServiceProvider;
 
 class AppServiceProvider extends ServiceProvider
 {
-    /**
-     * Регистрация сервисов приложения.
-     */
     public function register(): void
     {
         //
     }
 
-    /**
-     * Загрузка сервисов приложения.
-     */
     public function boot(): void
     {
         Blade::directive('thingStatus', function ($expression) {

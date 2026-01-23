@@ -3,7 +3,6 @@
 @section('content')
 <div class="w-full bg-neutral-950 text-neutral-200 py-12 px-6 md:px-12 font-sans selection:bg-lime-400 selection:text-black">
     <div class="max-w-4xl mx-auto">
-        <!-- Заголовок -->
         <div class="flex justify-between items-end mb-8 border-b border-neutral-800 pb-6">
             <div>
                 <h2 class="text-4xl md:text-6xl font-bold tracking-tighter text-white">
@@ -19,16 +18,12 @@
             </a>
         </div>
 
-        <!-- Основная информация -->
         <div class="grid grid-cols-1 lg:grid-cols-3 gap-8">
-            <!-- Левая колонка -->
             <div class="lg:col-span-2 space-y-8">
-                <!-- Карточка деталей -->
                 <div class="border border-neutral-800 p-8">
                     <h3 class="text-2xl font-medium text-white mb-6">Детали</h3>
                     
                     <div class="space-y-6">
-                        <!-- Название -->
                         <div>
                             <p class="text-neutral-500 font-mono text-sm uppercase tracking-widest mb-2">
                                 Название
@@ -36,7 +31,6 @@
                             <p class="text-white text-lg">{{ $thing->name }}</p>
                         </div>
 
-                        <!-- Статус -->
                         <div>
                             <p class="text-neutral-500 font-mono text-sm uppercase tracking-widest mb-2">
                                 Статус
@@ -44,7 +38,6 @@
                             @thingStatus($thing)
                         </div>
 
-                        <!-- Описание -->
                         @if($thing->description)
                         <div>
                             <p class="text-neutral-500 font-mono text-sm uppercase tracking-widest mb-2">
@@ -54,7 +47,6 @@
                         </div>
                         @endif
 
-                        <!-- Гарантия -->
                         @if($thing->wrnt)
                         <div>
                             <p class="text-neutral-500 font-mono text-sm uppercase tracking-widest mb-2">
@@ -75,7 +67,6 @@
                         </div>
                         @endif
 
-                        <!-- Владелец -->
                         <div>
                             <p class="text-neutral-500 font-mono text-sm uppercase tracking-widest mb-2">
                                 Владелец
@@ -83,7 +74,6 @@
                             <p class="text-neutral-300">{{ $thing->master->name }}</p>
                         </div>
 
-                        <!-- Дата создания -->
                         <div>
                             <p class="text-neutral-500 font-mono text-sm uppercase tracking-widest mb-2">
                                 Создано
